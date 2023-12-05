@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Contract task APIs
+  version: 0.0.0
+paths:
+  /contracts/balances/deposit/{user_id}/:
+    post:
+      operationId: contracts_balances_deposit_create
+      description: |-
+        This view let the user to deposite money in his account,
+        but the money should be less than 25% of his unpaid jobs price.
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/contracts/:
+    get:
+      operationId: contracts_contracts_retrieve
+      description: This view let the user see all of their contracts.
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/contracts/{id}/:
+    get:
+      operationId: contracts_contracts_retrieve_2
+      description: |-
+        This view is to let user see details of a specific contract
+        from his contracts only.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/jobs/:
+    get:
+      operationId: contracts_jobs_retrieve
+      description: This view let the user see his jobs.
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/jobs/{job_id}/pay/:
+    post:
+      operationId: contracts_jobs_pay_create
+      description: This view is to let the client pay one of his jobs.
+      parameters:
+      - in: path
+        name: job_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/jobs/best-clients/:
+    get:
+      operationId: contracts_jobs_best_clients_retrieve
+      description: |-
+        This view is to see which clients paid the most
+        in a specific period of time.
+      tags:
+      - contracts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /contracts/jobs/best-profession/:
+    get:
+      operationId: contracts_jobs_best_profession_retrieve
+      description: |-
+        This view is to see which profession got the best salary
+        in a specific period of time.
+      tags:
+      - contracts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /contracts/jobs/unpaid/:
+    get:
+      operationId: contracts_jobs_unpaid_retrieve
+      description: This view is to let the user see his unpaid jobs.
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/login/:
+    post:
+      operationId: contracts_login_create
+      description: This view is to make a login operation for user.
+      tags:
+      - contracts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /contracts/profile/:
+    get:
+      operationId: contracts_profile_retrieve
+      description: This view let the user see his profile information.
+      tags:
+      - contracts
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /contracts/profiles/:
+    get:
+      operationId: contracts_profiles_retrieve
+      tags:
+      - contracts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /contracts/signup/:
+    post:
+      operationId: contracts_signup_create
+      description: This view is to make a signup operation for user.
+      tags:
+      - contracts
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
